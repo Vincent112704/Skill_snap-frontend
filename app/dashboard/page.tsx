@@ -15,6 +15,23 @@ export default function Dashboard() {
   const handleFileUpload = () => {
     setIsAnalyzing(true)
     // Simulate upload and analysis progress
+        const getMessage = async () => {
+      try {
+        const response = await fetch("http://127.0.0.1:8000/api/v1/endpoints/test");
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json(); // ← Make sure this is called!
+        console.log("Server response:", data.message);
+      } catch (error) {
+        console.error("Fetch error:", error);
+      }
+    };
+
+    getMessage();
+
+    
     const interval = setInterval(() => {
       setUploadProgress((prev) => {
         if (prev >= 100) {
